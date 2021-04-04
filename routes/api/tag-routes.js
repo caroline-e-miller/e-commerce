@@ -12,6 +12,7 @@ router.get('/', async (req, res) => {
     });
     res.status(200).json(tagData);
   } catch (error) {
+    // console.log(error)
     res.status(500).json(error);
   }
 });
@@ -29,43 +30,21 @@ router.get('/:id', async (req, res) => {
       return;
     }
 
-    res.status(200).json(productData);
+    res.status(200).json(tagData);
   } catch (error) {
+    console.log(error)
     res.status(500).json(error);
   }
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   // create a new tag
-  Tag.create({
-    tag_name: "Santa Claus Action Figure",
-  })
-    .then((newTag) => {
-      res.json(newTag);
-    })
-    .catch((error) => {
-      res.json(error)
-    });
-  // Tag.create(req.body)
-  // .then((product) => {
-  //   // if there's product tags, we need to create pairings to bulk create in the ProductTag model
-  //   if (req.body.tagIds.length) {
-  //     const productTagIdArr = req.body.tagIds.map((tag_id) => {
-  //       return {
-  //         product_id: product.id,
-  //         tag_id,
-  //       };
-  //     });
-  //     return ProductTag.bulkCreate(productTagIdArr);
-  //   }
-  //   // if no product tags, just respond
-  //   res.status(200).json(product);
-  // })
-  // .then((productTagIds) => res.status(200).json(productTagIds))
-  // .catch((err) => {
-  //   console.log(err);
-  //   res.status(400).json(err);
-  // });
+  try {
+    const tagData = await Tag.create(req.body);
+    res.status(200).json(tagData);
+  } catch (error) {
+    res.status(400).json(error);
+  }
 });
 
 router.put('/:id', (req, res) => {
@@ -80,7 +59,7 @@ router.put('/:id', (req, res) => {
       res.json(updatedTag);
     })
     .catch((error) => {
-      console.log(error);
+      // console.log(error);
       res.status(400).json(error);
     })
 });

@@ -12,6 +12,7 @@ router.get('/', async (req, res) => {
     });
     res.status(200).json(categoryData);
   } catch (error) {
+    // console.log(error)
     res.status(500).json(error);
   }
   // be sure to include its associated Products
@@ -24,12 +25,13 @@ router.get('/:id', async (req, res) => {
     const categoryData = await Category.findByPk(req.params.id, {
       include: [{ model: Product, as: 'product' }]
     })
-    if (!categoryData) {
-      res.status(404).json({ message: 'No category found with that id!' });
-      return;
-    }
+    // if (!categoryData) {
+    //   res.status(404).json({ message: 'No category found with that id!' });
+    //   return;
+    // }
     res.status(200).json(categoryData);
   } catch (error) {
+    console.log(error)
     res.status(500).json(error)
   }
 });
@@ -42,7 +44,7 @@ router.post('/', async (req, res) => {
     });
     res.status(200).json(categoryData);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json(error);
   }
 });
@@ -55,11 +57,13 @@ router.put('/:id', async (req, res) => {
         id: req.params.id,
       },
     });
-    if (!categoryData[0]) {
-      res.status(404).json({ message: 'Woops! No category to update here.' })
+    if (!categoryData) {
+      res.status(404).json({ message: 'Woops! No category to update here.' });
+      return;
     }
 
   } catch (error) {
+    // console.log(error)
     res.status(500).json(error);
   }
 });
@@ -77,8 +81,9 @@ router.delete('/:id', async (req, res) => {
       res.status(404).json({ message: 'That category does not exist. You made it up.' })
       return;
     }
-
+    res.status(200).json(categoryData);
   } catch (error) {
+    // console.log(error)
     res.status(500).json(error);
   }
 });
