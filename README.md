@@ -20,6 +20,4 @@ The user is presented with the Insomnia interface. After selecting an action of 
 
 ## Recording
 
-https://drive.google.com/file/d/1Oe6TNuQbGZ8b6bDipcPAHiVJIxtxKCTE/view
-
-There is a bug that no one has been able to figure out yet, and it's affecting the category and tag routes. This will be fixed soon!
+https://drive.google.com/file/d/19wNxVXXDusNML9ig6eJpimdshiftOVlt/view
